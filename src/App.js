@@ -49,7 +49,7 @@ function App() {
         {/* 잘 들어오는지 테스트 */}
         {/* {contents} */}
         <button className="Button" onClick={clickAddButtonHandler}>
-          <h3>추가하기</h3>
+          <p>추가하기</p>
         </button>
       </div>
       <div className="app-style">
