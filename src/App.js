@@ -35,13 +35,17 @@ function App() {
 
   return (
     <div>
-      <div>
-        제목&nbsp;
-        <input value={title} onChange={titleChangeHandler} />
+      <div className="InputArea">
+        <h2>제목&nbsp;</h2>
+        <input className="Input" value={title} onChange={titleChangeHandler} />
         {/* 잘 들어오는지 테스트 */}
         {/* {title} */}
-        내용&nbsp;
-        <input value={contents} onChange={contentsChangeHandler} />
+        <h2>내용&nbsp;</h2>
+        <input
+          className="Input"
+          value={contents}
+          onChange={contentsChangeHandler}
+        />
         {/* 잘 들어오는지 테스트 */}
         {/* {contents} */}
         <button onClick={clickAddButtonHandler}>추가하기</button>
