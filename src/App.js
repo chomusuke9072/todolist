@@ -36,11 +36,11 @@ function App() {
   return (
     <div>
       <div className="InputArea">
-        <h2>제목&nbsp;</h2>
+        <h3 className="title">제목&nbsp;</h3>
         <input className="Input" value={title} onChange={titleChangeHandler} />
         {/* 잘 들어오는지 테스트 */}
         {/* {title} */}
-        <h2>내용&nbsp;</h2>
+        <h3 className="title">내용&nbsp;</h3>
         <input
           className="Input"
           value={contents}
@@ -48,7 +48,9 @@ function App() {
         />
         {/* 잘 들어오는지 테스트 */}
         {/* {contents} */}
-        <button onClick={clickAddButtonHandler}>추가하기</button>
+        <button className="Button" onClick={clickAddButtonHandler}>
+          <h3>추가하기</h3>
+        </button>
       </div>
       <div className="app-style">
         {todo.map(function (item) {
@@ -56,9 +58,9 @@ function App() {
             <div key={item.id} className="component-style">
               <h2>{item.title}</h2>
               <p>{item.contents}</p>
-              <div>
-                <button>삭제하기</button>
-                <button>완료</button>
+              <div className="gapButton">
+                <button className="newButton">삭제하기</button>
+                <button className="newButton">완료</button>
               </div>
             </div>
           );
