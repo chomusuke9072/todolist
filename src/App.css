@@ -1,3 +1,26 @@
+* {
+  justify-content: center;
+  align-items: center;
+  font-family: 'Pretendard-Regular';
+}
+
+.InputArea {
+  display: flex;
+  padding: 10px auto 0 auto;
+  gap: 20px;
+  height: 130px;
+  background-color: #d4b7a5cf;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.Input {
+  border-radius: 5px;
+  height: 30px;
+
+}
+
 .app-style {
     padding: 100px;
     display: flex;
@@ -7,7 +30,7 @@
   .component-style {
     width: 300px;
     height: 200px;
-    border: 3px solid orange;
+    border: 3px solid rgba(217, 179, 109, 0.93);
     border-Radius: 10px;
     display: inline;
     text-align: center;
