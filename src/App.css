@@ -52,9 +52,12 @@
   margin-right: 20px;
 }
 
+
 .app-style {
+    
     padding: 100px;
     display: flex;
+    flex-wrap: wrap;
     gap: 12px;
   }
   
