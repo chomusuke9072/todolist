@@ -3,6 +3,7 @@ import uuid from "react-uuid";
 import "./App.css";
 
 function App() {
+  //값을 변경하고 재렌더링을 위한 State 선언
   const [todo, setTodo] = useState([
     {
       id: uuid(),
@@ -22,14 +23,18 @@ function App() {
 
   const [contents, setContents] = useState("");
 
+  //제목 입력값을 기록하기 위한 핸들러
   const titleChangeHandler = (event) => {
     setTitle(event.target.value);
   };
 
+  //내용 입력값을 기록하기 위한 핸들러
   const contentsChangeHandler = (event) => {
     setContents(event.target.value);
   };
 
+  //추가 버튼 클릭시 기록한 제목,내용 입력값을 렌더링하기 위한 핸들러
+  //todo를 풀어서 newTodo값을 넣어서 setTodo로(State) 렌더링
   const clickAddButtonHandler = () => {
     const newTodo = {
       id: uuid(),
@@ -70,10 +75,7 @@ function App() {
           .map(function (item) {
             return (
               <div key={item.id} className="component-style">
-                <h2>
-                  {item.title}
-                  {item.id}
-                </h2>
+                <h2>{item.title}</h2>
                 <p>{item.contents}</p>
                 <div className="gapButton">
                   <button
@@ -102,10 +104,7 @@ function App() {
             .map(function (item) {
               return (
                 <div key={item.id} className="component-style">
-                  <h2>
-                    {item.title}
-                    {item.id}
-                  </h2>
+                  <h2>{item.title}</h2>
                   <p>{item.contents}</p>
                   <div className="gapButton">
                     <button
