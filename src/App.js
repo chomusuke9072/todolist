@@ -17,6 +17,18 @@ function App() {
       contents: "리액트 노션 보기!!!",
       isDone: true,
     },
+    {
+      id: uuid(),
+      title: "리액트 공부하기",
+      contents: "리액트 기초를 공부해봅시다.",
+      isDone: false,
+    },
+    {
+      id: uuid(),
+      title: "리액트 공부하기",
+      contents: "리액트 기초를 공부해봅시다.",
+      isDone: false,
+    },
   ]);
 
   const [title, setTitle] = useState("");
@@ -90,7 +102,24 @@ function App() {
                   >
                     삭제하기
                   </button>
-                  <button className="newButton">완료</button>
+                  <button
+                    className="newButton"
+                    onClick={() => {
+                      const newTodos = todo.map((item) => {
+                        if (item.id === todo.id) {
+                          return {
+                            ...item,
+                            isDone: true,
+                          };
+                        } else {
+                          return item;
+                        }
+                      });
+                      setTodo(newTodos);
+                    }}
+                  >
+                    완료
+                  </button>
                 </div>
               </div>
             );
@@ -119,7 +148,24 @@ function App() {
                     >
                       삭제하기
                     </button>
-                    <button className="newButton">취소</button>
+                    <button
+                      className="newButton"
+                      onClick={() => {
+                        const newTodos = todo.map((item) => {
+                          if (item.id === todo.id) {
+                            return {
+                              ...todo,
+                              isDone: !item.isDone,
+                            };
+                          } else {
+                            return item;
+                          }
+                        });
+                        setTodo(newTodos);
+                      }}
+                    >
+                      취소
+                    </button>
                   </div>
                 </div>
               );
