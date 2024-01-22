@@ -7,7 +7,7 @@ function App() {
   const [todo, setTodo] = useState([
     {
       id: uuid(),
-      title: "리액트 공부하기1",
+      title: "리액트 공부하기",
       contents: "리액트 기초를 공부해봅시다.",
       isDone: false,
     },
@@ -16,18 +16,6 @@ function App() {
       title: "리액트를 공부합시다.",
       contents: "리액트 노션 보기!!!",
       isDone: true,
-    },
-    {
-      id: uuid(),
-      title: "리액트 공부하기2",
-      contents: "리액트 기초를 공부해봅시다.",
-      isDone: false,
-    },
-    {
-      id: uuid(),
-      title: "리액트 공부하기3",
-      contents: "리액트 기초를 공부해봅시다.",
-      isDone: false,
     },
   ]);
 
@@ -70,8 +58,12 @@ function App() {
   };
 
   return (
-    <div>
-      <header></header>
+    <div className="up">
+      <div className="hader">
+        <header>My Todo List</header>
+        <p className="subject">React</p>
+      </div>
+
       <div className="InputArea">
         <h3 className="title">제목&nbsp;</h3>
         <input className="Input" value={title} onChange={titleChangeHandler} />
@@ -89,8 +81,8 @@ function App() {
           <p>추가하기</p>
         </button>
       </div>
-      <div>
-        <h2>할 일 목록!</h2>
+      <div className="up">
+        <h2 className="hader">할 일 목록!</h2>
       </div>
       <div className="app-style">
         {todo
@@ -125,7 +117,9 @@ function App() {
           })}
       </div>
       <div>
-        <h2>완료 목록!!</h2>
+        <div className="up">
+          <h2 className="hader">완료 목록!!</h2>
+        </div>
         <div className="app-style">
           {todo
             .filter((todo) => todo.isDone === true)

@@ -4,7 +4,22 @@
   font-family: 'Pretendard-Regular';
 }
 
+.up {
+  border: solid #5a5230;
+  border-radius: 10px;
+}
 
+.hader {
+ 
+  height: 40px;
+  display: flex;
+  margin-left: 10px;
+}
+
+.subject {
+  margin-right: 10px;
+  margin-left: auto;
+}
 
 .InputArea {
   display: flex;
