@@ -7,7 +7,7 @@ function App() {
   const [todo, setTodo] = useState([
     {
       id: uuid(),
-      title: "리액트 공부하기",
+      title: "리액트 공부하기1",
       contents: "리액트 기초를 공부해봅시다.",
       isDone: false,
     },
@@ -19,13 +19,13 @@ function App() {
     },
     {
       id: uuid(),
-      title: "리액트 공부하기",
+      title: "리액트 공부하기2",
       contents: "리액트 기초를 공부해봅시다.",
       isDone: false,
     },
     {
       id: uuid(),
-      title: "리액트 공부하기",
+      title: "리액트 공부하기3",
       contents: "리액트 기초를 공부해봅시다.",
       isDone: false,
     },
@@ -56,6 +56,17 @@ function App() {
     };
 
     setTodo([...todo, newTodo]);
+  };
+  //완료,취소 클릭시 변경되는 버튼 핸들러
+  //매개변수 없을때 전체가 바껴서 매개변수로 id주기.
+  const completeBtn = (id) => {
+    const completeTodo = todo.filter((item) => {
+      if (item.id === id) {
+        item.isDone = !item.isDone;
+      }
+      return item;
+    });
+    setTodo(completeTodo);
   };
 
   return (
@@ -104,19 +115,7 @@ function App() {
                   </button>
                   <button
                     className="newButton"
-                    onClick={() => {
-                      const newTodos = todo.map((item) => {
-                        if (item.id === todo.id) {
-                          return {
-                            ...item,
-                            isDone: true,
-                          };
-                        } else {
-                          return item;
-                        }
-                      });
-                      setTodo(newTodos);
-                    }}
+                    onClick={() => completeBtn(item.id)}
                   >
                     완료
                   </button>
@@ -150,19 +149,7 @@ function App() {
                     </button>
                     <button
                       className="newButton"
-                      onClick={() => {
-                        const newTodos = todo.map((item) => {
-                          if (item.id === todo.id) {
-                            return {
-                              ...todo,
-                              isDone: !item.isDone,
-                            };
-                          } else {
-                            return item;
-                          }
-                        });
-                        setTodo(newTodos);
-                      }}
+                      onClick={() => completeBtn(item.id)}
                     >
                       취소
                     </button>
