@@ -9,12 +9,14 @@ function App() {
       id: uuid(),
       title: "리액트 공부하기",
       contents: "리액트 기초를 공부해봅시다.",
+      deadline: "2024-03-15",
       isDone: false,
     },
     {
       id: uuid(),
       title: "리액트를 공부합시다.",
       contents: "리액트 노션 보기!!!",
+      deadline: "2024-03-15",
       isDone: true,
     },
   ]);
@@ -22,6 +24,8 @@ function App() {
   const [title, setTitle] = useState("");
 
   const [contents, setContents] = useState("");
+
+  const [deadline, setDeadline] = useState("");
 
   //제목 입력값을 기록하기 위한 핸들러
   const titleChangeHandler = (event) => {
@@ -32,6 +36,10 @@ function App() {
   const contentsChangeHandler = (event) => {
     setContents(event.target.value);
   };
+  //마감일 입력값을 기록하기 위한 핸들러
+  const deadlinesChangeHandler = (event) => {
+    setDeadline(event.target.value);
+  };
 
   //추가 버튼 클릭시 기록한 제목,내용 입력값을 렌더링하기 위한 핸들러
   //todo를 풀어서 newTodo값을 넣어서 setTodo로(State) 렌더링
@@ -40,6 +48,7 @@ function App() {
       id: uuid(),
       title,
       contents,
+      deadline,
       isDone: false,
     };
 
@@ -47,8 +56,8 @@ function App() {
   };
   //완료,취소 클릭시 변경되는 버튼 핸들러
   //매개변수 없을때 전체가 바껴서 매개변수로 id주기.
-  const completeBtn = (id) => {
-    const completeTodo = todo.filter((item) => {
+  const completeBtn = function (id) {
+    const completeTodo = todo.filter(function (item) {
       if (item.id === id) {
         item.isDone = !item.isDone;
       }
@@ -77,6 +86,8 @@ function App() {
         />
         {/* 잘 들어오는지 테스트 */}
         {/* {contents} */}
+        <h3 className="title">마감날짜 :&nbsp;</h3>
+        <input type="date" value={deadline} onChange={deadlinesChangeHandler} />
         <button className="Button" onClick={clickAddButtonHandler}>
           <p>추가하기</p>
         </button>
@@ -84,14 +95,19 @@ function App() {
       <div className="up">
         <h2 className="hader">할 일 목록!</h2>
       </div>
-      <div className="app-style">
+      <div className="todo-card">
         {todo
           .filter((todo) => todo.isDone === false)
           .map(function (item) {
             return (
               <div key={item.id} className="component-style">
-                <h2>{item.title}</h2>
-                <p>{item.contents}</p>
+                <div className="TodoTitle">
+                  <h2>{item.title}</h2>
+                </div>
+                <div className="TodoContent">
+                  <p>{item.contents}</p>
+                </div>
+                <div>{new Date(item.deadline).toLocaleDateString()}</div>
                 <div className="gapButton">
                   <button
                     className="newButton"
@@ -120,14 +136,19 @@ function App() {
         <div className="up">
           <h2 className="hader">완료 목록!!</h2>
         </div>
-        <div className="app-style">
+        <div className="todo-card">
           {todo
             .filter((todo) => todo.isDone === true)
             .map(function (item) {
               return (
                 <div key={item.id} className="component-style">
-                  <h2>{item.title}</h2>
-                  <p>{item.contents}</p>
+                  <div className="TodoTitle">
+                    <h2>{item.title}</h2>
+                  </div>
+                  <div className="TodoContent">
+                    <p>{item.contents}</p>
+                  </div>
+                  <div>{new Date(item.deadline).toLocaleDateString()}</div>
                   <div className="gapButton">
                     <button
                       className="newButton"

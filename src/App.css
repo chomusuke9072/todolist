@@ -1,5 +1,5 @@
 * {
-  
+
   align-items: center;
   font-family: 'Pretendard-Regular';
 }
@@ -10,7 +10,7 @@
 }
 
 .hader {
- 
+
   height: 40px;
   display: flex;
   margin-left: 10px;
@@ -38,52 +38,63 @@
   width: 200px;
 
 }
+
 .title {
-  color:#5a5230;
+  color: #5a5230;
 }
 
 .Button {
-  background-color:#877c49;
+  background-color: #877c49;
   color: #fff;
-  border:none;
-  border-radius:20px;
+  border: none;
+  border-radius: 20px;
   height: 31px;
   width: 68px;
   display: flex;
-  
+
 }
 
 .newButton {
-  background-color:#877c49;
+  background-color: #877c49;
   color: #fff;
-  border:none;
-  border-radius:30px;
+  border: none;
+  border-radius: 30px;
   height: 30px;
   width: 70px;
-  margin-top: 3px;
-  margin-left: 20px;
+
 }
+
+.todo-card {
+
+  padding: 100px;
+  display: flex;
+  flex-direction: column;
+
+}
+
+.component-style {
+  width: 350px;
+  height: 250px;
+  border: 3px solid rgba(217, 179, 109, 0.93);
+  border-Radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: center;
+  align-Items: center;
+  justify-Content: center;
+}
+
+/* .TodoContent {
+  background-color: aqua;
+}
+
+.TodoTitle {
+  background-color: red;
+} */
+
 .gapButton {
-  margin-right: 20px;
+  width: 280px;
+  display: flex;
+  justify-content: space-between;
 }
-
-
-.app-style {
-    
-    padding: 100px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-  
-  .component-style {
-    width: 250px;
-    height: 150px;
-    border: 3px solid rgba(217, 179, 109, 0.93);
-    border-Radius: 10px;
-    display: inline;
-    text-align: center;
-    align-Items: center;
-    justify-Content: center;
-  }
-
