@@ -5,21 +5,23 @@ import "./App.css";
 function App() {
   //값을 변경하고 재렌더링을 위한 State 선언
   const [todo, setTodo] = useState([
-    {
-      id: uuid(),
-      title: "리액트 공부하기",
-      contents: "리액트 기초를 공부해봅시다.",
-      deadline: "2024-03-15",
-      isDone: false,
-    },
-    {
-      id: uuid(),
-      title: "리액트를 공부합시다.",
-      contents: "리액트 노션 보기!!!",
-      deadline: "2024-03-15",
-      isDone: true,
-    },
+    // {
+    //   id: uuid(),
+    //   title: "리액트 공부하기",
+    //   contents: "리액트 기초를 공부해봅시다.",
+    //   deadline: "2024-03-15",
+    //   isDone: false,
+    // },
+    // {
+    //   id: uuid(),
+    //   title: "리액트를 공부합시다.",
+    //   contents: "리액트 노션 보기!!!",
+    //   deadline: "2024-03-15",
+    //   isDone: true,
+    // },
   ]);
+
+  const [sortOrder, setSortOder] = useState("asc");
 
   const [title, setTitle] = useState("");
 
@@ -66,6 +68,22 @@ function App() {
     setTodo(completeTodo);
   };
 
+  const onChangeSortOrder = (event) => {
+    const nextSortOrder = event.target.value;
+
+    setSortOder(nextSortOrder);
+
+    if (nextSortOrder === "asc") {
+      setTodo((todo) =>
+        [...todo].sort((a, b) => new Date(a.deadline) - new Date(b.deadline))
+      );
+      return;
+    }
+    setTodo((todo) =>
+      [...todo].sort((a, b) => new Date(b.deadline) - new Date(a.deadline))
+    );
+  };
+
   return (
     <div className="up">
       <div className="hader">
@@ -87,7 +105,19 @@ function App() {
         {/* 잘 들어오는지 테스트 */}
         {/* {contents} */}
         <h3 className="title">마감날짜 :&nbsp;</h3>
-        <input type="date" value={deadline} onChange={deadlinesChangeHandler} />
+        <div>
+          <input
+            type="date"
+            value={deadline}
+            onChange={deadlinesChangeHandler}
+          />
+          <select onChange={onChangeSortOrder} value={sortOrder}>
+            <option value="asc" selected>
+              오름차순
+            </option>
+            <option value="desc">내림차순</option>
+          </select>
+        </div>
         <button className="Button" onClick={clickAddButtonHandler}>
           <p>추가하기</p>
         </button>
@@ -107,7 +137,13 @@ function App() {
                 <div className="TodoContent">
                   <p>{item.contents}</p>
                 </div>
-                <div>{new Date(item.deadline).toLocaleDateString()}</div>
+                <time>
+                  {new Date(item.deadline).toLocaleDateString("ko-KR", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </time>
                 <div className="gapButton">
                   <button
                     className="newButton"
@@ -148,7 +184,13 @@ function App() {
                   <div className="TodoContent">
                     <p>{item.contents}</p>
                   </div>
-                  <div>{new Date(item.deadline).toLocaleDateString()}</div>
+                  <time>
+                    {new Date(item.deadline).toLocaleDateString("ko-KR", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </time>
                   <div className="gapButton">
                     <button
                       className="newButton"
