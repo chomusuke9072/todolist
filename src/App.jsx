@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import uuid from "react-uuid";
-import "./App.css";
-import styled from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 
 function App() {
   //값을 변경하고 재렌더링을 위한 State 선언
@@ -84,6 +83,19 @@ function App() {
       [...todo].sort((a, b) => new Date(b.deadline) - new Date(a.deadline))
     );
   };
+
+  const GlobalStyle = createGlobalStyle`
+    body {
+  all: unset;
+}
+  `;
+
+  const StGlobal = styled.div`
+    * {
+      align-items: center;
+      font-family: "Pretendard-Regular";
+    }
+  `;
 
   const StLayout = styled.div`
     border: solid #5a5230;
@@ -168,88 +180,47 @@ function App() {
   `;
 
   return (
-    <StLayout>
-      <StDivHader>
-        <header>My Todo List</header>
-        <StSubject>React</StSubject>
-      </StDivHader>
-
-      <StInputArea>
-        <StTitle>제목&nbsp;</StTitle>
-        <StInput value={title} onChange={titleChangeHandler} />
-        {/* 잘 들어오는지 테스트 */}
-        {/* {title} */}
-        <StTitle>내용&nbsp;</StTitle>
-        <StInput value={contents} onChange={contentsChangeHandler} />
-        {/* 잘 들어오는지 테스트 */}
-        {/* {contents} */}
-        <StTitle>마감날짜 :&nbsp;</StTitle>
-        <div>
-          <input
-            type="date"
-            value={deadline}
-            onChange={deadlinesChangeHandler}
-          />
-          <select onChange={onChangeSortOrder} value={sortOrder}>
-            <option value="asc" selected>
-              오름차순
-            </option>
-            <option value="desc">내림차순</option>
-          </select>
-        </div>
-        <StButton onClick={clickAddButtonHandler}>
-          <p>추가하기</p>
-        </StButton>
-      </StInputArea>
+    <StGlobal>
+      <GlobalStyle />
       <StLayout>
-        <StH2Hader>할 일 목록!</StH2Hader>
-      </StLayout>
-      <StTodoCard>
-        {todo
-          .filter((todo) => todo.isDone === false)
-          .map(function (item) {
-            return (
-              <StTodos key={item.id}>
-                <div className="TodoTitle">
-                  <h2>{item.title}</h2>
-                </div>
-                <div className="TodoContent">
-                  <p>{item.contents}</p>
-                </div>
-                <time>
-                  {new Date(item.deadline).toLocaleDateString("ko-KR", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}
-                </time>
-                <StGapButton>
-                  <StNewButton
-                    onClick={() => {
-                      const delTodo = todo.filter((todo) => {
-                        return todo.id !== item.id;
-                      });
+        <StDivHader>
+          <header>My Todo List</header>
+          <StSubject>React</StSubject>
+        </StDivHader>
 
-                      setTodo(delTodo);
-                    }}
-                  >
-                    삭제하기
-                  </StNewButton>
-                  <StNewButton onClick={() => completeBtn(item.id)}>
-                    완료
-                  </StNewButton>
-                </StGapButton>
-              </StTodos>
-            );
-          })}
-      </StTodoCard>
-      <div>
+        <StInputArea>
+          <StTitle>제목&nbsp;</StTitle>
+          <StInput value={title} onChange={titleChangeHandler} />
+          {/* 잘 들어오는지 테스트 */}
+          {/* {title} */}
+          <StTitle>내용&nbsp;</StTitle>
+          <StInput value={contents} onChange={contentsChangeHandler} />
+          {/* 잘 들어오는지 테스트 */}
+          {/* {contents} */}
+          <StTitle>마감날짜 :&nbsp;</StTitle>
+          <div>
+            <input
+              type="date"
+              value={deadline}
+              onChange={deadlinesChangeHandler}
+            />
+            <select onChange={onChangeSortOrder} value={sortOrder}>
+              <option value="asc" selected>
+                오름차순
+              </option>
+              <option value="desc">내림차순</option>
+            </select>
+          </div>
+          <StButton onClick={clickAddButtonHandler}>
+            <p>추가하기</p>
+          </StButton>
+        </StInputArea>
         <StLayout>
-          <StH2Hader>완료 목록!!</StH2Hader>
+          <StH2Hader>할 일 목록!</StH2Hader>
         </StLayout>
         <StTodoCard>
           {todo
-            .filter((todo) => todo.isDone === true)
+            .filter((todo) => todo.isDone === false)
             .map(function (item) {
               return (
                 <StTodos key={item.id}>
@@ -279,15 +250,59 @@ function App() {
                       삭제하기
                     </StNewButton>
                     <StNewButton onClick={() => completeBtn(item.id)}>
-                      취소
+                      완료
                     </StNewButton>
                   </StGapButton>
                 </StTodos>
               );
             })}
         </StTodoCard>
-      </div>
-    </StLayout>
+        <div>
+          <StLayout>
+            <StH2Hader>완료 목록!!</StH2Hader>
+          </StLayout>
+          <StTodoCard>
+            {todo
+              .filter((todo) => todo.isDone === true)
+              .map(function (item) {
+                return (
+                  <StTodos key={item.id}>
+                    <div className="TodoTitle">
+                      <h2>{item.title}</h2>
+                    </div>
+                    <div className="TodoContent">
+                      <p>{item.contents}</p>
+                    </div>
+                    <time>
+                      {new Date(item.deadline).toLocaleDateString("ko-KR", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })}
+                    </time>
+                    <StGapButton>
+                      <StNewButton
+                        onClick={() => {
+                          const delTodo = todo.filter((todo) => {
+                            return todo.id !== item.id;
+                          });
+
+                          setTodo(delTodo);
+                        }}
+                      >
+                        삭제하기
+                      </StNewButton>
+                      <StNewButton onClick={() => completeBtn(item.id)}>
+                        취소
+                      </StNewButton>
+                    </StGapButton>
+                  </StTodos>
+                );
+              })}
+          </StTodoCard>
+        </div>
+      </StLayout>
+    </StGlobal>
   );
 }
 
