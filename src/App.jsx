@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import uuid from "react-uuid";
 import "./App.css";
+import styled from "styled-components";
 
 function App() {
   //값을 변경하고 재렌더링을 위한 State 선언
@@ -84,27 +85,105 @@ function App() {
     );
   };
 
-  return (
-    <div className="up">
-      <div className="hader">
-        <header>My Todo List</header>
-        <p className="subject">React</p>
-      </div>
+  const StLayout = styled.div`
+    border: solid #5a5230;
+    border-radius: 10px;
+  `;
 
-      <div className="InputArea">
-        <h3 className="title">제목&nbsp;</h3>
-        <input className="Input" value={title} onChange={titleChangeHandler} />
+  const StDivHader = styled.div`
+    height: 40px;
+    display: flex;
+    margin-left: 10px;
+  `;
+
+  const StH2Hader = styled.h2`
+    height: 40px;
+    display: flex;
+    margin-left: 10px;
+  `;
+
+  const StSubject = styled.p`
+    margin-right: 10px;
+    margin-left: auto;
+  `;
+  const StInputArea = styled.div`
+    display: flex;
+    padding: 10px auto 0 auto;
+    gap: 15px;
+    height: 130px;
+    background-color: #d4b7a5cf;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+  `;
+  const StInput = styled.input`
+    border-radius: 3px;
+    height: 30px;
+    width: 200px;
+  `;
+
+  const StTitle = styled.h3`
+    color: #5a5230;
+  `;
+
+  const StButton = styled.button`
+    background-color: #877c49;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    height: 31px;
+    width: 68px;
+    display: flex;
+  `;
+
+  const StNewButton = styled.button`
+    background-color: #877c49;
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    height: 30px;
+    width: 70px;
+  `;
+  const StTodoCard = styled.div`
+    padding: 100px;
+    display: flex;
+    flex-direction: column;
+  `;
+  const StTodos = styled.div`
+    width: 350px;
+    height: 250px;
+    border: 3px solid rgba(217, 179, 109, 0.93);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+  `;
+  const StGapButton = styled.div`
+    width: 280px;
+    display: flex;
+    justify-content: space-between;
+  `;
+
+  return (
+    <StLayout>
+      <StDivHader>
+        <header>My Todo List</header>
+        <StSubject>React</StSubject>
+      </StDivHader>
+
+      <StInputArea>
+        <StTitle>제목&nbsp;</StTitle>
+        <StInput value={title} onChange={titleChangeHandler} />
         {/* 잘 들어오는지 테스트 */}
         {/* {title} */}
-        <h3 className="title">내용&nbsp;</h3>
-        <input
-          className="Input"
-          value={contents}
-          onChange={contentsChangeHandler}
-        />
+        <StTitle>내용&nbsp;</StTitle>
+        <StInput value={contents} onChange={contentsChangeHandler} />
         {/* 잘 들어오는지 테스트 */}
         {/* {contents} */}
-        <h3 className="title">마감날짜 :&nbsp;</h3>
+        <StTitle>마감날짜 :&nbsp;</StTitle>
         <div>
           <input
             type="date"
@@ -118,19 +197,19 @@ function App() {
             <option value="desc">내림차순</option>
           </select>
         </div>
-        <button className="Button" onClick={clickAddButtonHandler}>
+        <StButton onClick={clickAddButtonHandler}>
           <p>추가하기</p>
-        </button>
-      </div>
-      <div className="up">
-        <h2 className="hader">할 일 목록!</h2>
-      </div>
-      <div className="todo-card">
+        </StButton>
+      </StInputArea>
+      <StLayout>
+        <StH2Hader>할 일 목록!</StH2Hader>
+      </StLayout>
+      <StTodoCard>
         {todo
           .filter((todo) => todo.isDone === false)
           .map(function (item) {
             return (
-              <div key={item.id} className="component-style">
+              <StTodos key={item.id}>
                 <div className="TodoTitle">
                   <h2>{item.title}</h2>
                 </div>
@@ -144,9 +223,8 @@ function App() {
                     day: "numeric",
                   })}
                 </time>
-                <div className="gapButton">
-                  <button
-                    className="newButton"
+                <StGapButton>
+                  <StNewButton
                     onClick={() => {
                       const delTodo = todo.filter((todo) => {
                         return todo.id !== item.id;
@@ -156,28 +234,25 @@ function App() {
                     }}
                   >
                     삭제하기
-                  </button>
-                  <button
-                    className="newButton"
-                    onClick={() => completeBtn(item.id)}
-                  >
+                  </StNewButton>
+                  <StNewButton onClick={() => completeBtn(item.id)}>
                     완료
-                  </button>
-                </div>
-              </div>
+                  </StNewButton>
+                </StGapButton>
+              </StTodos>
             );
           })}
-      </div>
+      </StTodoCard>
       <div>
-        <div className="up">
-          <h2 className="hader">완료 목록!!</h2>
-        </div>
-        <div className="todo-card">
+        <StLayout>
+          <StH2Hader>완료 목록!!</StH2Hader>
+        </StLayout>
+        <StTodoCard>
           {todo
             .filter((todo) => todo.isDone === true)
             .map(function (item) {
               return (
-                <div key={item.id} className="component-style">
+                <StTodos key={item.id}>
                   <div className="TodoTitle">
                     <h2>{item.title}</h2>
                   </div>
@@ -191,9 +266,8 @@ function App() {
                       day: "numeric",
                     })}
                   </time>
-                  <div className="gapButton">
-                    <button
-                      className="newButton"
+                  <StGapButton>
+                    <StNewButton
                       onClick={() => {
                         const delTodo = todo.filter((todo) => {
                           return todo.id !== item.id;
@@ -203,20 +277,17 @@ function App() {
                       }}
                     >
                       삭제하기
-                    </button>
-                    <button
-                      className="newButton"
-                      onClick={() => completeBtn(item.id)}
-                    >
+                    </StNewButton>
+                    <StNewButton onClick={() => completeBtn(item.id)}>
                       취소
-                    </button>
-                  </div>
-                </div>
+                    </StNewButton>
+                  </StGapButton>
+                </StTodos>
               );
             })}
-        </div>
+        </StTodoCard>
       </div>
-    </div>
+    </StLayout>
   );
 }
 
